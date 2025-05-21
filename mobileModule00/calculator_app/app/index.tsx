@@ -1,5 +1,6 @@
 import {Button, Text, View, StyleSheet, TouchableOpacity} from "react-native";
 import React, { useState } from 'react';
+import { evaluate } from 'mathjs';
 
 const BUTTONS = [
     ['7', '8', '9', 'C', 'AC'],
@@ -8,15 +9,30 @@ const BUTTONS = [
     ['0', '.', '00', '='],
 ];
 export default function Index() {
-    const [text, setText] = useState('a simple text');
+    const [expression, setExpression] = useState('');
+    const [result, setResult] = useState('');
     const handlePress = (value) => {
-        console.log('Pressed:', value);
+        if (value === 'C') {
+            setExpression((prev) => prev.slice(0, -1));
+        } else if (value === 'AC/' || value === 'AC') {
+            setExpression('');
+            setResult('');
+        } else if (value === '=') {
+            try {
+                const evalResult = evaluate(expression);
+                setResult(evalResult.toString());
+            } catch (e) {
+                setResult('Error');
+            }
+        } else {
+            setExpression((prev) => prev + value);
+        }
     };
     return (
         <View style={styles.container}>
             <View style={styles.display}>
-                <Text style={styles.secondaryDisplay}>0</Text>
-                <Text style={styles.mainDisplay}>0</Text>
+                <Text style={styles.secondaryDisplay}>{expression || '0'}</Text>
+                <Text style={styles.mainDisplay}>{result || '0'}</Text>
             </View>
             {BUTTONS.map((row, rowIndex) => (
                 <View key={rowIndex} style={styles.row}>
