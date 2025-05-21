@@ -1,13 +1,17 @@
 import {Button, Text, View, StyleSheet} from "react-native";
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Index() {
+    const [text, setText] = useState('a simple text');
     const handlePress = () => {
-        console.log('Button was pressed!');
+        //console.log('Button was pressed!');
+        setText(prevText =>
+            prevText === 'a simple text' ? 'hello world' : 'a simple text'
+        );
     };
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>A simple text</Text>
+            <Text style={styles.text}>{text}</Text>
             <View style={styles.buttonContainer}>
                 <Button title="Click me" onPress={handlePress} />
             </View>
