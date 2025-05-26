@@ -1,15 +1,13 @@
-import { Text, View } from "react-native";
+import { View, Text, StyleSheet } from 'react-native';
 
-export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>text</Text>
-    </View>
-  );
+export default function CurrentlyScreen() {
+    return (
+        <View style={styles.container}>
+            <Text>Currently</Text>
+        </View>
+    );
 }
+
+const styles = StyleSheet.create({
+    container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+});

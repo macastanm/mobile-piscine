@@ -1,22 +1,71 @@
-import React from 'react';
-import { SafeAreaView } from 'react-native';
-import WeatherAppBar from "@/app/weatherAppBar";
+import React, {useState} from 'react';
+import {View, StyleSheet, TextInput} from 'react-native';
+import {Tabs} from 'expo-router';
+import { Appbar } from 'react-native-paper';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-
-export default function Index() {
-    const handleSearch = (city) => {
-        console.log('Search for city:', city);
-        // Trigger weather API call
-    };
-
-    const handleLocationFetch = (coords) => {
-        console.log('Current location coords:', coords);
-        // Trigger weather API call using coords.latitude & coords.longitude
-    };
+export default function Layout() {
+    const [searchQuery, setSearchQuery] = useState('');
+    const primaryColor = '#6200ee';
 
     return (
-        <SafeAreaView>
-            <WeatherAppBar onSearch={handleSearch} onLocationFetch={handleLocationFetch} />
-        </SafeAreaView>
+        <View style={{ flex: 1 }}>
+            <Appbar.Header style={{ backgroundColor: primaryColor }}>
+                <TextInput
+                    style={[styles.searchInput, { backgroundColor: 'white' }]}
+                    placeholder="Search city..."
+                    value={searchQuery}
+                    onChangeText={setSearchQuery}
+                />
+                <Appbar.Action icon="crosshairs-gps" onPress={() => {}} iconColor="white" />
+            </Appbar.Header>
+
+            <Tabs
+                screenOptions={{
+                    tabBarActiveTintColor: 'white',
+                    tabBarInactiveTintColor: '#ccc',
+                    tabBarStyle: { backgroundColor: primaryColor },
+                    headerShown: false,
+                }}
+            >
+                <Tabs.Screen
+                    name="index"
+                    options={{
+                        title: 'Currently',
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="weather-cloudy" color={color} size={size} />
+                        ),
+                    }}
+                />
+                <Tabs.Screen
+                    name="today"
+                    options={{
+                        title: 'Today',
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="calendar-today" color={color} size={size} />
+                        ),
+                    }}
+                />
+                <Tabs.Screen
+                    name="weekly"
+                    options={{
+                        title: 'Weekly',
+                        tabBarIcon: ({ color, size }) => (
+                            <MaterialCommunityIcons name="calendar-week" color={color} size={size} />
+                        ),
+                    }}
+                />
+            </Tabs>
+        </View>
     );
 }
+
+const styles = StyleSheet.create({
+    searchInput: {
+        flex: 1,
+        borderRadius: 4,
+        marginLeft: 10,
+        paddingHorizontal: 10,
+        height: 40,
+    },
+});
