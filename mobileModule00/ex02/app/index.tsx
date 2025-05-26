@@ -1,14 +1,23 @@
-import {Button, Text, View, StyleSheet, TouchableOpacity} from "react-native";
+import {Button, Text, View, StyleSheet, TouchableOpacity, useWindowDimensions } from "react-native";
 import React, { useState } from 'react';
 
-const BUTTONS = [
+const BUTTONS_PORTRAIT = [
     ['7', '8', '9', 'C', 'AC'],
     ['4', '5', '6', '+', '-'],
     ['1', '2', '3', '*', '/'],
     ['0', '.', '00', '='],
 ];
+
+const BUTTONS_LANDSCAPE = [
+    ['5', '6', '7', '8', '9', 'C', 'AC'],
+    ['0', '1', '2', '3', '4', '+', '-'],
+    ['00', '.', '*', '/', '='],
+];
+
 export default function Index() {
-    const [text, setText] = useState('a simple text');
+    const { width, height } = useWindowDimensions();
+    const isLandscape = width > height;
+    const BUTTONS = isLandscape ? BUTTONS_LANDSCAPE : BUTTONS_PORTRAIT;
     const handlePress = (value) => {
         console.log('Pressed:', value);
     };
@@ -28,6 +37,7 @@ export default function Index() {
                                 key={colIndex}
                                 style={[
                                     styles.button,
+                                    isLandscape && { paddingVertical: 8 },
                                     isEqualButton && styles.equalButton,
                                 ]}
                                 onPress={() => handlePress(buttonValue)}
@@ -50,19 +60,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     display: {
-        paddingVertical: 20,
+        paddingVertical: 15,
         borderRadius: 8,
         marginBottom: 24,
         alignItems: 'flex-end',
     },
     secondaryDisplay: {
-        paddingVertical: 20,
+        paddingVertical: 10,
         borderRadius: 8,
         fontSize: 20,
         color: '#666',
     },
     mainDisplay: {
-        paddingVertical: 20,
+        paddingVertical: 10,
         borderRadius: 8,
         fontSize: 36,
         fontWeight: 'bold',
@@ -77,7 +87,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginHorizontal: 4,
         backgroundColor: '#e0e0e0',
-        paddingVertical: 20,
+        paddingVertical: 30,
         borderRadius: 8,
         alignItems: 'center',
     },
