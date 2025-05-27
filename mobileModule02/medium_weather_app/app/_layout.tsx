@@ -27,7 +27,10 @@ function MainLayout() {
                 return;
             }
             let coordinates = await Location.getCurrentPositionAsync({});
-            setLocation('Geolocation');
+            const { latitude, longitude } = coordinates.coords;
+
+            const locationString = `Lat: ${latitude.toFixed(6)}, Lon: ${longitude.toFixed(6)}`;
+            setLocation(locationString);
             //console.log(coordinates.coords);
         } catch (error) {
             console.log('Error getting location', error);
