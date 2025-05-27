@@ -27,8 +27,8 @@ function MainLayout() {
                 return;
             }
             let coordinates = await Location.getCurrentPositionAsync({});
-            // setLocation('Geolocation');
-            console.log(coordinates.coords);
+            setLocation('Geolocation');
+            //console.log(coordinates.coords);
         } catch (error) {
             console.log('Error getting location', error);
             setLocation('Error');
