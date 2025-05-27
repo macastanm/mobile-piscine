@@ -4,30 +4,40 @@ import {Tabs} from 'expo-router';
 import { Appbar } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
+import {LocationProvider, useLocation} from "@/app/locationContext";
 
 export default function Layout() {
+    return (
+        <LocationProvider>
+            <MainLayout />
+        </LocationProvider>
+    );
+}
+
+function MainLayout() {
     const [searchQuery, setSearchQuery] = useState('');
     const primaryColor = '#6200ee';
-    let location;
+    const { setLocation } = useLocation();
     const handleLocationPress = async () => {
         try {
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
                 console.log('Permission to access location was denied');
-                location = 'Permission to access location was denied';
+                setLocation('Permission to access location was denied');
                 return;
             }
             let coordinates = await Location.getCurrentPositionAsync({});
-            location = 'Geolocation';
+            // setLocation('Geolocation');
             console.log(coordinates.coords);
         } catch (error) {
             console.log('Error getting location', error);
+            setLocation('Error');
         }
     };
 
     function onSearch(searchQuery: string) {
-        location = searchQuery;
-        console.log(location);
+        setLocation(searchQuery);
+        // console.log(location);
     }
 
     return (
