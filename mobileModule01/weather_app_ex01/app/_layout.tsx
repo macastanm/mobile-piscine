@@ -3,10 +3,32 @@ import {View, StyleSheet, TextInput} from 'react-native';
 import {Tabs} from 'expo-router';
 import { Appbar } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as Location from 'expo-location';
 
 export default function Layout() {
     const [searchQuery, setSearchQuery] = useState('');
     const primaryColor = '#6200ee';
+    let location;
+    const handleLocationPress = async () => {
+        try {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                console.log('Permission to access location was denied');
+                location = 'Permission to access location was denied';
+                return;
+            }
+            let coordinates = await Location.getCurrentPositionAsync({});
+            location = 'Geolocation';
+            console.log(coordinates.coords);
+        } catch (error) {
+            console.log('Error getting location', error);
+        }
+    };
+
+    function onSearch(searchQuery: string) {
+        location = searchQuery;
+        console.log(location);
+    }
 
     return (
         <View style={{ flex: 1 }}>
@@ -16,8 +38,9 @@ export default function Layout() {
                     placeholder="Search city..."
                     value={searchQuery}
                     onChangeText={setSearchQuery}
+                    onSubmitEditing={() => onSearch(searchQuery)}
                 />
-                <Appbar.Action icon="crosshairs-gps" onPress={() => {}} iconColor="white" />
+                <Appbar.Action icon="crosshairs-gps" onPress={handleLocationPress} iconColor="white" />
             </Appbar.Header>
 
             <Tabs
