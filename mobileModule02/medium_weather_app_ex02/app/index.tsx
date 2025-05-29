@@ -1,9 +1,37 @@
 import { View, Text, StyleSheet } from 'react-native';
 import {useLocation} from "@/app/locationContext";
+import {useEffect, useState} from "react";
+import {getWeatherDescription} from "@/app/utils";
 
 export default function CurrentlyScreen() {
     const { location } = useLocation();
     const isError = location.name === 'Error';
+
+    const [temperature, setTemperature] = useState<number | null>(null);
+    const [windSpeed, setWindSpeed] = useState<number | null>(null);
+    const [weatherCode, setWeatherCode] = useState<number | null>(null);
+
+    useEffect(() => {
+        const fetchWeather = async () => {
+            if (location.latitude && location.longitude && location.name !== 'Error') {
+                try {
+                    const response = await fetch(
+                        `https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current_weather=true`
+                    );
+                    const data = await response.json();
+                    const current = data.current_weather;
+
+                    setTemperature(current.temperature);
+                    setWindSpeed(current.windspeed);
+                    setWeatherCode(current.weathercode);
+                } catch (error) {
+                    console.error('Weather fetch error:', error);
+                }
+            }
+        };
+
+        fetchWeather();
+    }, [location]);
 
     return (
         <View style={styles.container}>
@@ -14,9 +42,12 @@ export default function CurrentlyScreen() {
                 </View>
             ) : (
                 <View style={{ alignItems: 'center' }}>
-                    <Text style={styles.title}>Currently</Text>
-                    <Text>{location.name}</Text>
+                    <Text style={styles.title}>{location.name}</Text>
+                    <Text>{temperature !== null ? `${temperature}°C` : 'No city selected'}</Text>
+                    <Text>{getWeatherDescription(weatherCode)}</Text>
+                    <Text>{windSpeed !== null ? `${windSpeed} km/h` : 'Search a city to get the weather'}</Text>
                 </View>
+
             )}
         </View>
     );

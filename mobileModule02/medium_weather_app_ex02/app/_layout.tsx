@@ -28,8 +28,8 @@ function MainLayout() {
                 console.log('Permission to access location was denied');
                 setLocation({
                     name: 'Error',
-                    latitude: 'Permission to access location was denied.',
-                    longitude: 'Geolocation is not available, please enable it in your App settings',
+                    latitude: 'Geolocation is not available,',
+                    longitude: 'please enable it in your App settings',
                 });
                 return;
             }
@@ -49,7 +49,7 @@ function MainLayout() {
             setLocation({
                 name: 'Error',
                 latitude: 'Error getting location',
-                longitude: 'Geolocation is not available, please enable it in your App settings',
+                longitude: 'Please try again',
             });
         }
     };
