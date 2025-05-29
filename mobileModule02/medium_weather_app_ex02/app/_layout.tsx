@@ -26,19 +26,31 @@ function MainLayout() {
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
                 console.log('Permission to access location was denied');
-                setLocation('Permission to access location was denied');
+                setLocation({
+                    name: 'Error',
+                    latitude: 'Permission to access location was denied.',
+                    longitude: 'Geolocation is not available, please enable it in your App settings',
+                });
                 return;
             }
             let coordinates = await Location.getCurrentPositionAsync({});
             const { latitude, longitude } = coordinates.coords;
 
-            const locationString = `Lat: ${latitude.toFixed(5)}, Lon: ${longitude.toFixed(5)}`;
-            setLocation(locationString);
+            //const locationString = `Lat: ${latitude.toFixed(5)}, Lon: ${longitude.toFixed(5)}`;
+            setLocation({
+                name: 'Geolocation',
+                latitude: `${latitude.toFixed(5)}`,
+                longitude: `${longitude.toFixed(5)}`,
+            });
             setSearchQuery('');
             //console.log(coordinates.coords);
         } catch (error) {
             console.log('Error getting location', error);
-            setLocation('Error');
+            setLocation({
+                name: 'Error',
+                latitude: 'Error getting location',
+                longitude: 'Geolocation is not available, please enable it in your App settings',
+            });
         }
     };
 
@@ -52,11 +64,19 @@ function MainLayout() {
             if (data.results) {
                 handleCitySelect(data.results[0]);
             } else {
-                setLocation('No match to the search');
+                setLocation({
+                    name: 'Error',
+                    latitude: 'No match to the search',
+                    longitude: 'Please try again',
+                });
             }
         } catch (error) {
             console.error('Error fetching cities:', error);
-            setLocation('Error fetching cities');
+            setLocation({
+                name: 'Error',
+                latitude: 'Error fetching cities',
+                longitude: 'Please try again',
+            });
         }
         setSuggestions([]);
     }
@@ -79,7 +99,11 @@ function MainLayout() {
                 }
             } catch (error) {
                 console.error('Error fetching cities:', error);
-                //setLocation('Error fetching cities');
+                setLocation({
+                    name: 'Error',
+                    latitude: 'Error fetching cities',
+                    longitude: 'Please try again',
+                });
                 setSuggestions([]);
             }
         }, 300),
@@ -90,11 +114,14 @@ function MainLayout() {
         fetchCitySuggestions(searchQuery);
     }, [searchQuery]);
     function handleCitySelect(city) {
-        const locationString = `Lat: ${city.latitude}, Lon: ${city.longitude}`;
-        setLocation(locationString);
-        setSearchQuery(`${city.name}, ${city.admin1}, ${city.country}`);
+        //const locationString = `Lat: ${city.latitude}, Lon: ${city.longitude}`;
+        setLocation({
+            name: `${city.name}, ${city.admin1}, ${city.country}`,
+            latitude: `${city.latitude}`,
+            longitude: `${city.longitude}`,
+        });
+        setSearchQuery('');
         setSuggestions([]);
-        //onSearch(locationString);
     }
 
 

@@ -3,18 +3,19 @@ import {useLocation} from "@/app/locationContext";
 
 export default function WeeklyScreen() {
 	const { location } = useLocation();
-	const isError = location === 'Permission to access location was denied' || location === 'Error';
+	const isError = location.name === 'Error';
 
 	return (
 		<View style={styles.container}>
 			{ isError ? (
-				<Text style={styles.errorText}>
-					Geolocation is not available, please enable it in your App settings
-				</Text>
+				<View style={{ alignItems: 'center' }}>
+					<Text style={styles.errorText}>{location.latitude}</Text>
+					<Text style={styles.errorText}>{location.longitude}</Text>
+				</View>
 			) : (
 				<View style={{ alignItems: 'center' }}>
 					<Text style={styles.title}>Weekly</Text>
-					<Text>{location}</Text>
+					<Text>{location.name}</Text>
 				</View>
 			)}
 		</View>
