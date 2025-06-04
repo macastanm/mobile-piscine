@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Text, View, StyleSheet, TextInput, TouchableOpacity, Animated} from 'react-native';
+import {Text, View, StyleSheet, TextInput, TouchableOpacity, Animated, ImageBackground} from 'react-native';
 import {Tabs} from 'expo-router';
 import { Appbar } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -126,7 +126,12 @@ function MainLayout() {
 
 
     return (
-        <View style={{ flex: 1 }}>
+        <ImageBackground
+            source={require('@/assets/images/background.jpg')}
+            style={styles.background}
+            resizeMode="cover"
+        >
+        <View style={{ flex: 1, backgroundColor: 'transparent' }}>
             <Appbar.Header style={{ backgroundColor: primaryColor }}>
                 <TextInput
                     style={[styles.searchInput, { backgroundColor: 'white' }]}
@@ -193,10 +198,14 @@ function MainLayout() {
                 />
             </Tabs>
         </View>
+        </ImageBackground>
     );
 }
 
 const styles = StyleSheet.create({
+    background: {
+        flex: 1,
+    },
     searchInput: {
         flex: 1,
         borderRadius: 4,
