@@ -1,12 +1,14 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {Text, View, StyleSheet, TextInput, TouchableOpacity, Animated, ImageBackground} from 'react-native';
-import {Tabs} from 'expo-router';
+import {Slot, Tabs} from 'expo-router';
 import { Appbar } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
 import {LocationProvider, useLocation} from "@/app/locationContext";
 import {debounce} from "@react-navigation/native-stack/src/utils/debounce";
 import FlatList = Animated.FlatList;
+import {Image} from "expo-image";
+import CurrentlyScreen from "@/app/(tabs)";
 
 export default function Layout() {
     return (
@@ -124,13 +126,7 @@ function MainLayout() {
         setSuggestions([]);
     }
 
-
     return (
-        <ImageBackground
-            source={require('@/assets/images/background.jpg')}
-            style={styles.background}
-            resizeMode="cover"
-        >
         <View style={{ flex: 1, backgroundColor: 'transparent' }}>
             <Appbar.Header style={{ backgroundColor: primaryColor }}>
                 <TextInput
@@ -161,51 +157,12 @@ function MainLayout() {
                     )}
                 />
             )}
-            <Tabs
-                screenOptions={{
-                    tabBarActiveTintColor: 'white',
-                    tabBarInactiveTintColor: '#ccc',
-                    tabBarStyle: { backgroundColor: primaryColor },
-                    headerShown: false,
-                }}
-            >
-                <Tabs.Screen
-                    name="index"
-                    options={{
-                        title: 'Currently',
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="weather-cloudy" color={color} size={size} />
-                        ),
-                    }}
-                />
-                <Tabs.Screen
-                    name="today"
-                    options={{
-                        title: 'Today',
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="calendar-today" color={color} size={size} />
-                        ),
-                    }}
-                />
-                <Tabs.Screen
-                    name="weekly"
-                    options={{
-                        title: 'Weekly',
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="calendar-week" color={color} size={size} />
-                        ),
-                    }}
-                />
-            </Tabs>
+            <Slot />
         </View>
-        </ImageBackground>
     );
 }
 
 const styles = StyleSheet.create({
-    background: {
-        flex: 1,
-    },
     searchInput: {
         flex: 1,
         borderRadius: 4,
