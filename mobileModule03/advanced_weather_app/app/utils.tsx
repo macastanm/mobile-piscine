@@ -19,3 +19,25 @@ export const getWeatherDescription = (code: number | null) => {
 	};
 	return code !== null ? descriptions[code] || 'Unknown' : '';
 };
+
+export const getWeatherIcon = (code: number | null) => {
+	const icons: { [key: number]: string } = {
+		0: '☀️',
+		1: '🌤️',
+		2: '⛅',
+		3: '☁️',
+		45: '🌫️',
+		48: '🌫️',
+		51: '🌦️',
+		53: '🌦️',
+		55: '🌧️',
+		61: '🌧️',
+		63: '🌧️',
+		65: '🌧️',
+		71: '🌨️',
+		73: '🌨️',
+		75: '❄️',
+		95: '⛈️',
+	};
+	return code !== null ? icons[code] || '❓' : '';
+};

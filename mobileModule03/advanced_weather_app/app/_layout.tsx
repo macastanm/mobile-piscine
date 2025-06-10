@@ -20,7 +20,6 @@ export default function Layout() {
 
 function MainLayout() {
     const [searchQuery, setSearchQuery] = useState('');
-    const primaryColor = '#a5dcfc';
     const { setLocation } = useLocation();
     const [suggestions, setSuggestions] = useState([]);
     const handleLocationPress = async () => {
@@ -128,7 +127,7 @@ function MainLayout() {
 
     return (
         <View style={{ flex: 1, backgroundColor: 'transparent' }}>
-            <Appbar.Header style={{ backgroundColor: primaryColor }}>
+            <Appbar.Header style={{ backgroundColor: '#a5dcfc' }}>
                 <TextInput
                     style={[styles.searchInput, { backgroundColor: 'white' }]}
                     placeholder="Search city..."
