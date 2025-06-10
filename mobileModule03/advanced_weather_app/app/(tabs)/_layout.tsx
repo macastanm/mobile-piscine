@@ -5,7 +5,7 @@ import {
 	StyleSheet,
 	useWindowDimensions,
 	ImageBackground,
-	Animated,
+	Animated, Pressable,
 } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import CurrentlyScreen from "@/app/(tabs)/index";
@@ -50,7 +50,7 @@ export default function TabViewBottomTabs() {
 
 	return (
 		<ImageBackground
-			source={require('@/assets/images/background.jpg')}
+			source={require('@/assets/images/background.png')}
 			style={styles.background}
 			resizeMode="cover"
 		>
@@ -65,30 +65,27 @@ export default function TabViewBottomTabs() {
 					initialLayout={{ width: layout.width }}
 					renderTabBar={() => null}
 				/>
-
-				<TabBar
-					navigationState={{ index, routes }}
-					jumpTo={(key) => {
-						const i = routes.findIndex((r) => r.key === key);
-						setIndex(i);
-						position.setValue(i);
-					}}
-					style={styles.tabBar}
-					indicatorStyle={styles.indicator}
-					labelStyle={styles.label}
-					position={position}
-					renderIcon={({ route, focused, color }) => (
-						<MaterialCommunityIcons
-							name={route.icon}
-							color={color}
-							size={22}
-							style={{ marginBottom: 4 }}
-						/>
-					)}
-					renderLabel={({ route, color }) => (
-						<Text style={[styles.label, { color }]}>{route.title}</Text>
-					)}
-				/>
+				<View style={styles.customTabBar}>
+					{routes.map((route, i) => {
+						const isFocused = index === i;
+						return (
+							<Pressable
+								key={route.key}
+								onPress={() => setIndex(i)}
+								style={styles.tabItem}
+							>
+								<MaterialCommunityIcons
+									name={route.icon}
+									size={24}
+									color={isFocused ? 'white' : '#aaa'}
+								/>
+								<Text style={[styles.tabText, isFocused && { color: 'white' }]}>
+									{route.title}
+								</Text>
+							</Pressable>
+						);
+					})}
+				</View>
 			</View>
 		</ImageBackground>
 	);
@@ -105,19 +102,24 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: 'transparent',
 	},
 	text: {
 		fontSize: 24,
 		color: 'white',
 	},
-	tabBar: {
-		backgroundColor: '#6200ee',
+	customTabBar: {
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		backgroundColor: '#3d7fba',
+		paddingVertical: 15,
 	},
-	indicator: {
-		backgroundColor: 'white',
+	tabItem: {
+		alignItems: 'center',
 	},
-	label: {
-		color: 'white',
+	tabText: {
+		fontSize: 12,
+		color: '#aaa',
+		marginTop: 2,
 	},
 });
+

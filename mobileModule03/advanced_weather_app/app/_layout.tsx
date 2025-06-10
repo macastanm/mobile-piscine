@@ -20,7 +20,7 @@ export default function Layout() {
 
 function MainLayout() {
     const [searchQuery, setSearchQuery] = useState('');
-    const primaryColor = '#6200ee';
+    const primaryColor = '#a5dcfc';
     const { setLocation } = useLocation();
     const [suggestions, setSuggestions] = useState([]);
     const handleLocationPress = async () => {
