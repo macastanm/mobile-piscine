@@ -68,38 +68,40 @@ export default function TodayScreen() {
 							height={220}
 							yAxisSuffix="°C"
 							chartConfig={{
-								backgroundColor: "#ffffff",
-								backgroundGradientFrom: "#ffffff",
-								backgroundGradientTo: "#ffffff",
+								backgroundColor: 'rgba(255, 255, 255, 0.8)',
+								backgroundGradientFrom: 'rgba(255, 255, 255, 0.8)',
+								backgroundGradientTo: 'rgba(255, 255, 255, 0.8)',
 								decimalPlaces: 1,
-								color: (opacity = 1) => `rgba(0, 122, 255, ${opacity})`,
-								labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+								color: (opacity = 0.8) => `rgba(0, 122, 255, ${opacity})`,
+								labelColor: () => '#000',
 								propsForDots: {
-									r: "4",
-									strokeWidth: "1",
-									stroke: "#1e90ff",
+									r: '4',
+									strokeWidth: '1',
+									stroke: '#1e90ff',
 								},
 								propsForLabels: {
-									fontSize: 8,
+									fontSize: 10,
 								},
 							}}
 							bezier
 							style={styles.chart}
 						/>
+						<View style={{flexDirection: 'row'}}>
 						<ScrollView
-							horizontal
-							showsHorizontalScrollIndicator={false}
+							horizontal={true}
+							showsHorizontalScrollIndicator={true}
 							contentContainerStyle={styles.hourScroll}
 						>
 							{hourlyData.map((hour, index) => (
 								<View key={index} style={styles.hourCard}>
 									<Text style={styles.hourTime}>{hour.time}</Text>
-									<Text style={styles.hourTemp}>{hour.temp}°C</Text>
 									<Text style={styles.hourIcon}>{getWeatherIcon(hour.code)}</Text>
+									<Text style={styles.hourTemp}>{hour.temp}°C</Text>
 									<Text style={styles.hourWind}>🌬️ {hour.wind} km/h</Text>
 								</View>
 							))}
 						</ScrollView>
+						</View>
 					</>
 				)}
 			</View>
@@ -110,6 +112,8 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		padding: 16,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	title: {
 		fontSize: 26,
@@ -152,7 +156,7 @@ const styles = StyleSheet.create({
 		marginBottom: 4,
 	},
 	hourTemp: {
-		fontSize: 16,
+		fontSize: 14,
 		fontWeight: '500',
 		marginBottom: 2,
 	},
@@ -160,7 +164,7 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 	},
 	hourWind: {
-		fontSize: 12,
+		fontSize: 14,
 		color: '#555',
 		marginTop: 2,
 		textAlign: 'center',
