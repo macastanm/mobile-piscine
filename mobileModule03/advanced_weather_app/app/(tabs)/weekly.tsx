@@ -70,19 +70,19 @@ export default function WeeklyScreen() {
 					<Text style={styles.errorText}>{location.longitude}</Text>
 				</View>
 			) : (
-				<View style={{ flex: 1, width: '100%' }}>
+				<>
 					<Text style={styles.title}>
 						{location.name !== '' ? `${location.name}` : 'Weekly'}
 					</Text>
-
 					{weeklyData.length > 0 && (
 						<LineChart
 							data={chartData}
 							width={screenWidth - 32}
 							height={220}
 							chartConfig={{
-								backgroundGradientFrom: "#ffffff",
-								backgroundGradientTo: "#ffffff",
+								backgroundColor: 'rgba(255, 255, 255, 0.8)',
+								backgroundGradientFrom: 'rgba(255, 255, 255, 0.8)',
+								backgroundGradientTo: 'rgba(255, 255, 255, 0.8)',
 								color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
 								labelColor: () => "#333",
 								propsForDots: { r: "4" },
@@ -90,18 +90,24 @@ export default function WeeklyScreen() {
 							style={styles.chart}
 						/>
 					)}
-
-					<ScrollView style={styles.scrollList}>
+					<View style={{flexDirection: 'row'}}>
+					<ScrollView
+						horizontal={true}
+						showsHorizontalScrollIndicator={true}
+						style={styles.dayScroll}>
 						{weeklyData.map((day, index) => (
 							<View key={index} style={styles.dayCard}>
-								<Text style={styles.dayTitle}>{day.day}</Text>
-								<Text style={styles.dayInfo}>
-									{day.min}°C / {day.max}°C — {getWeatherIcon(day.code)} {getWeatherDescription(day.code)}
-								</Text>
+								<Text style={styles.dayTime}>{day.day}</Text>
+								<Text style={styles.dayIcon}>{getWeatherIcon(day.code)}</Text>
+								<Text style={styles.dayTempMax}>{day.max}°C</Text>
+								<Text style={styles.dayTempMax}>max</Text>
+								<Text style={styles.dayTempMin}>{day.min}°C</Text>
+								<Text style={styles.dayTempMin}>min</Text>
 							</View>
 						))}
 					</ScrollView>
-				</View>
+					</View>
+				</>
 			)}
 		</View>
 	);
@@ -110,15 +116,20 @@ export default function WeeklyScreen() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: 'center',
 		padding: 16,
-		backgroundColor: 'transparent',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	title: {
 		fontSize: 26,
 		fontWeight: 'bold',
-		marginBottom: 16,
 		textAlign: 'center',
+		marginBottom: 16,
+		alignItems: 'center',
+		gap: 10,
+		backgroundColor: 'rgba(255, 255, 255, 0.8)',
+		padding: 12,
+		borderRadius: 8,
 	},
 	errorText: {
 		color: 'red',
@@ -126,25 +137,43 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 	},
 	chart: {
-		marginVertical: 8,
 		borderRadius: 8,
+		marginBottom: 20,
+		textAlign: 'center',
 	},
-	scrollList: {
-		marginTop: 10,
+	dayScroll: {
+		flexDirection: 'row',
+		paddingHorizontal: 4,
+		flexGrow: 1,
 	},
 	dayCard: {
-		backgroundColor: '#f3f4f6',
+		backgroundColor: 'rgba(255, 255, 255, 0.8)',
 		padding: 12,
-		borderRadius: 8,
-		marginBottom: 10,
-		marginHorizontal: 8,
+		borderRadius: 10,
+		alignItems: 'center',
+		justifyContent: 'center',
+		marginRight: 12,
+		width: 90,
 	},
-	dayTitle: {
-		fontSize: 18,
+	dayTime: {
+		fontSize: 14,
 		fontWeight: 'bold',
+		marginBottom: 6,
 	},
-	dayInfo: {
-		fontSize: 16,
-		color: '#333',
+	dayTempMax: {
+		fontSize: 14,
+		fontWeight: '500',
+		marginBottom: 6,
+		color: '#ef4444',
+	},
+	dayTempMin: {
+		fontSize: 14,
+		fontWeight: '500',
+		marginBottom: 6,
+		color: '#3b82f6',
+	},
+	dayIcon: {
+		fontSize: 24,
+		marginBottom: 6,
 	},
 });

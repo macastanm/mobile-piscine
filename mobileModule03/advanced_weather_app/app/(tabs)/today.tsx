@@ -155,15 +155,16 @@ const styles = StyleSheet.create({
 	hourTime: {
 		fontSize: 14,
 		fontWeight: 'bold',
-		marginBottom: 4,
+		marginBottom: 6,
 	},
 	hourTemp: {
 		fontSize: 14,
 		fontWeight: '500',
-		marginBottom: 2,
+		marginBottom: 6,
 	},
 	hourIcon: {
 		fontSize: 24,
+		marginBottom: 6,
 	},
 	hourWind: {
 		fontSize: 14,
