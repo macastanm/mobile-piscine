@@ -64,6 +64,7 @@ export default function TabViewBottomTabs() {
 					}}
 					initialLayout={{ width: layout.width }}
 					renderTabBar={() => null}
+					swipeEnabled={false}
 				/>
 				<View style={styles.customTabBar}>
 					{routes.map((route, i) => {

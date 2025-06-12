@@ -1,4 +1,4 @@
-import {ScrollView, View, Text, StyleSheet, Dimensions } from 'react-native';
+import {ScrollView, View, Text, StyleSheet, Dimensions, Platform} from 'react-native';
 import {useLocation} from "@/app/locationContext";
 import {useEffect, useState} from "react";
 import {getWeatherDescription, getWeatherIcon} from "@/app/utils";
@@ -62,30 +62,32 @@ export default function TodayScreen() {
 						<Text style={styles.title}>
 							{location.name !== '' ? `${location.name}` : 'Today'}
 						</Text>
-						<LineChart
-							data={temperatureChart}
-							width={screenWidth - 32}
-							height={220}
-							yAxisSuffix="°C"
-							chartConfig={{
-								backgroundColor: 'rgba(255, 255, 255, 0.8)',
-								backgroundGradientFrom: 'rgba(255, 255, 255, 0.8)',
-								backgroundGradientTo: 'rgba(255, 255, 255, 0.8)',
-								decimalPlaces: 1,
-								color: (opacity = 0.8) => `rgba(0, 122, 255, ${opacity})`,
-								labelColor: () => '#000',
-								propsForDots: {
-									r: '4',
-									strokeWidth: '1',
-									stroke: '#1e90ff',
-								},
-								propsForLabels: {
-									fontSize: 10,
-								},
-							}}
-							bezier
-							style={styles.chart}
-						/>
+						{ hourlyData.length > 0  && (
+							<LineChart
+								data={temperatureChart}
+								width={screenWidth - 32}
+								height={220}
+								yAxisSuffix="°C"
+								chartConfig={{
+									backgroundColor: 'rgba(255, 255, 255, 0.8)',
+									backgroundGradientFrom: 'rgba(255, 255, 255, 0.8)',
+									backgroundGradientTo: 'rgba(255, 255, 255, 0.8)',
+									decimalPlaces: 1,
+									color: (opacity = 0.8) => `rgba(0, 122, 255, ${opacity})`,
+									labelColor: () => '#000',
+									propsForDots: {
+										r: '4',
+										strokeWidth: '1',
+										stroke: '#1e90ff',
+									},
+									propsForLabels: {
+										fontSize: 10,
+									},
+								}}
+								bezier
+								style={styles.chart}
+							/>
+						)}
 						<View style={{flexDirection: 'row'}}>
 						<ScrollView
 							horizontal={true}
