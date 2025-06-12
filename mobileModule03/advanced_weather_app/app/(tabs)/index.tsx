@@ -44,23 +44,26 @@ export default function CurrentlyScreen() {
                     <Text style={styles.locationText}>
                         {location.name !== '' ? location.name : 'Currently'}
                     </Text>
-
-                    <Text style={styles.temperatureText}>
-                        {temperature !== null ? `🌡️ ${temperature}°C` : ''}
-                    </Text>
-
-                    <View style={styles.weatherRow}>
-                        <Text style={styles.weatherIcon}>
-                            {getWeatherIcon(weatherCode)}
+                    {temperature && (
+                        <Text style={styles.temperatureText}>
+                            {`🌡️ ${temperature}°C`}
                         </Text>
-                        <Text style={styles.weatherDescription}>
-                            {getWeatherDescription(weatherCode)}
+                    )}
+                    {weatherCode && (
+                        <View style={styles.weatherRow}>
+                            <Text style={styles.weatherIcon}>
+                                {getWeatherIcon(weatherCode)}
+                            </Text>
+                            <Text style={styles.weatherDescription}>
+                                {getWeatherDescription(weatherCode)}
+                            </Text>
+                        </View>
+                    )}
+                    {windSpeed && (
+                        <Text style={styles.windText}>
+                            {windSpeed !== null ? `🌬️ ${windSpeed} km/h` : ''}
                         </Text>
-                    </View>
-
-                    <Text style={styles.windText}>
-                        {windSpeed !== null ? `🌬️ ${windSpeed} km/h` : ''}
-                    </Text>
+                    )}
                 </View>
             )}
         </View>
