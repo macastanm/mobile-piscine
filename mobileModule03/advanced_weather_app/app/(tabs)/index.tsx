@@ -49,7 +49,7 @@ export default function CurrentlyScreen() {
                             {`🌡️ ${temperature}°C`}
                         </Text>
                     )}
-                    { weatherCode && (
+                    { weatherCode !== null && (
                         <View style={styles.weatherRow}>
                             <Text style={styles.weatherIcon}>
                                 {getWeatherIcon(weatherCode)}
