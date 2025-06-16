@@ -65,7 +65,7 @@ export default function TodayScreen() {
 						{ hourlyData.length > 0  && (
 							<LineChart
 								data={temperatureChart}
-								width={screenWidth - 32}
+								width={Math.min(screenWidth - 32, 600)}
 								height={220}
 								yAxisSuffix="°C"
 								chartConfig={{
@@ -141,7 +141,8 @@ const styles = StyleSheet.create({
 	hourScroll: {
 		flexDirection: 'row',
 		paddingHorizontal: 4,
-		flexGrow: 1,
+		// flexGrow: 1,
+		overflow: Platform.OS === 'web' ? 'scroll' : 'visible',
 	},
 	hourCard: {
 		backgroundColor: 'rgba(255, 255, 255, 0.8)',

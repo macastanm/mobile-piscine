@@ -77,7 +77,7 @@ export default function WeeklyScreen() {
 					{weeklyData.length > 0 && (
 						<LineChart
 							data={chartData}
-							width={screenWidth - 32}
+							width={Math.min(screenWidth - 32, 600)}
 							height={220}
 							chartConfig={{
 								backgroundColor: 'rgba(255, 255, 255, 0.8)',
