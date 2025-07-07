@@ -12,21 +12,23 @@ export default function WeeklyScreen() {
 	useEffect(() => {
 		if (isError) return;
 		const fetchWeeklyForecast = async () => {
-			try {
-				const res = await fetch(
-					`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto`
-				);
-				const data = await res.json();
-				const { time, temperature_2m_min, temperature_2m_max, weathercode } = data.daily;
-				const formatted = time.map((date: string, i: number) => ({
-					date,
-					min: temperature_2m_min[i],
-					max: temperature_2m_max[i],
-					code: weathercode[i],
-				}));
-				setWeeklyData(formatted);
-			} catch (error) {
-				console.error("Failed to fetch weekly forecast:", error);
+			if (location.latitude && location.longitude && location.name !== 'Error') {
+				try {
+					const res = await fetch(
+						`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto`
+					);
+					const data = await res.json();
+					const {time, temperature_2m_min, temperature_2m_max, weathercode} = data.daily;
+					const formatted = time.map((date: string, i: number) => ({
+						date,
+						min: temperature_2m_min[i],
+						max: temperature_2m_max[i],
+						code: weathercode[i],
+					}));
+					setWeeklyData(formatted);
+				} catch (error) {
+					console.error("Failed to fetch weekly forecast:", error);
+				}
 			}
 		};
 		fetchWeeklyForecast();
