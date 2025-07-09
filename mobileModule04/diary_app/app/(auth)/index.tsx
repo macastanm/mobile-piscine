@@ -15,7 +15,7 @@ export default function LoginScreen() {
   useEffect(() => {
     // If user is already authenticated, redirect to diary
     if (isAuthenticated) {
-      router.replace("/(tabs)");
+      router.replace("/(protected)/(tabs)");
     }
   }, [isAuthenticated]);
 

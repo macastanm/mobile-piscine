@@ -22,7 +22,7 @@ export default function AuthOptionsScreen() {
   useEffect(() => {
     // If user is already authenticated, redirect to diary
     if (isAuthenticated) {
-      router.replace("/(tabs)");
+      router.replace("/(protected)/(tabs)");
     }
   }, [isAuthenticated]);
 
@@ -30,7 +30,7 @@ export default function AuthOptionsScreen() {
     try {
       setLoadingProvider("google");
       await signInWithGoogle();
-      router.replace("/(tabs)");
+      router.replace("/(protected)/(tabs)");
     } catch (error) {
       Alert.alert("Error", "Failed to sign in with Google. Please try again.");
     } finally {
@@ -42,7 +42,7 @@ export default function AuthOptionsScreen() {
     try {
       setLoadingProvider("github");
       await signInWithGitHub();
-      router.replace("/(tabs)");
+      router.replace("/(protected)/(tabs)");
     } catch (error) {
       Alert.alert("Error", "Failed to sign in with GitHub. Please try again.");
     } finally {
