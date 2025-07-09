@@ -11,9 +11,9 @@ export default function AuthLayout() {
     }, 500);
   }
 
-//   if (isAuthenticated) {
-//     return <Redirect href="/drinks" />;
-//   }
+  if (isAuthenticated) {
+    return <Redirect href="/(protected)/(tabs)" />;
+  }
 
   return <Slot />;
 }

@@ -5,9 +5,9 @@ import React from "react";
 export default function ProtectedLayout() {
   const { isAuthenticated } = useAuth();
 
-//   if (!isAuthenticated) {
-//     return <Redirect href="/(auth)" />;
-//   }
+  if (!isAuthenticated) {
+    return <Redirect href="/(auth)" />;
+  }
 
   return (
     <Stack>
