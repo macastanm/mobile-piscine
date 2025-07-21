@@ -1,5 +1,6 @@
 import {Button, Text, View, StyleSheet, TouchableOpacity, useWindowDimensions } from "react-native";
 import React, { useState } from 'react';
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const BUTTONS_PORTRAIT = [
     ['7', '8', '9', 'C', 'AC'],
@@ -18,11 +19,11 @@ export default function Index() {
     const { width, height } = useWindowDimensions();
     const isLandscape = width > height;
     const BUTTONS = isLandscape ? BUTTONS_LANDSCAPE : BUTTONS_PORTRAIT;
-    const handlePress = (value) => {
+    const handlePress = (value: string) => {
         console.log('Pressed:', value);
     };
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container} edges={["left", "right"]}>
             <View style={styles.display}>
                 <Text style={styles.secondaryDisplay}>0</Text>
                 <Text style={styles.mainDisplay}>0</Text>
@@ -48,46 +49,48 @@ export default function Index() {
                     })}
                 </View>
             ))}
-        </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        padding: 16,
+        padding: 8,
         justifyContent: 'flex-end',
         flex: 1,
         backgroundColor: '#fff',
     },
     display: {
-        paddingVertical: 15,
-        borderRadius: 8,
-        marginBottom: 24,
+        // paddingVertical: 15,
+        // borderRadius: 2,
+        // marginBottom: 1,
         alignItems: 'flex-end',
     },
     secondaryDisplay: {
         paddingVertical: 10,
-        borderRadius: 8,
-        fontSize: 20,
+        borderRadius: 2,
+        fontSize: 26,
+        marginBottom: 1,
         color: '#666',
     },
     mainDisplay: {
         paddingVertical: 10,
-        borderRadius: 8,
-        fontSize: 36,
+        borderRadius: 2,
+        fontSize: 32,
+        marginBottom: 1,
         fontWeight: 'bold',
         color: '#000',
     },
     row: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 12,
+        marginBottom: 8,
     },
     button: {
         flex: 1,
-        marginHorizontal: 4,
+        marginHorizontal: 2,
         backgroundColor: '#e0e0e0',
-        paddingVertical: 30,
+        paddingVertical: 15,
         borderRadius: 8,
         alignItems: 'center',
     },
