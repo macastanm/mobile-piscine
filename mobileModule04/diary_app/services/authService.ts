@@ -8,7 +8,7 @@ import {
   Auth,
 } from "firebase/auth";
 import { auth } from "@/config/firebase";
-import { ENV } from "@/config/env";
+import { ENV, validateConfig } from "@/config/env";
 import * as AuthSession from "expo-auth-session";
 import * as WebBrowser from "expo-web-browser";
 import * as Crypto from "expo-crypto";
@@ -56,6 +56,13 @@ export class AuthService {
 
   // Sign in with Google
   async signInWithGoogle(): Promise<AuthUser> {
+    // Validate configuration first
+    if (!validateConfig()) {
+      throw new Error(
+        "Invalid configuration. Please check your environment variables."
+      );
+    }
+
     try {
       // Create the auth request
       const request = new AuthSession.AuthRequest({
@@ -70,8 +77,10 @@ export class AuthService {
         },
       });
 
-      // Get the authorization URL
-      const authUrl = await request.makeAuthUrlAsync();
+      // Get the authorization URL with Google's authorization endpoint
+      const authUrl = await request.makeAuthUrlAsync({
+        authorizationEndpoint: "https://accounts.google.com/o/oauth2/v2/auth",
+      });
 
       // Open the browser for authentication
       const result = await WebBrowser.openAuthSessionAsync(
@@ -84,6 +93,7 @@ export class AuthService {
         const tokenResult = await request.exchangeCodeAsync(result.url, {
           clientId: googleConfig.clientId,
           clientSecret: "", // Not needed for mobile apps
+          tokenEndpoint: "https://oauth2.googleapis.com/token",
         });
 
         if (tokenResult.accessToken) {
@@ -102,12 +112,39 @@ export class AuthService {
       throw new Error("Google sign-in was cancelled or failed");
     } catch (error) {
       console.error("Google sign-in error:", error);
+
+      // Provide more specific error messages
+      if (error instanceof Error) {
+        if (error.message.includes("authorizationEndpoint")) {
+          throw new Error(
+            "Google OAuth configuration error. Please check your Google Client ID."
+          );
+        }
+        if (error.message.includes("Invalid client")) {
+          throw new Error(
+            "Invalid Google Client ID. Please check your OAuth configuration."
+          );
+        }
+        if (error.message.includes("redirect_uri_mismatch")) {
+          throw new Error(
+            "Redirect URI mismatch. Please check your OAuth app configuration."
+          );
+        }
+      }
+
       throw error;
     }
   }
 
   // Sign in with GitHub
   async signInWithGitHub(): Promise<AuthUser> {
+    // Validate configuration first
+    if (!validateConfig()) {
+      throw new Error(
+        "Invalid configuration. Please check your environment variables."
+      );
+    }
+
     try {
       // Create the auth request
       const request = new AuthSession.AuthRequest({
@@ -155,6 +192,21 @@ export class AuthService {
       throw new Error("GitHub sign-in was cancelled or failed");
     } catch (error) {
       console.error("GitHub sign-in error:", error);
+
+      // Provide more specific error messages
+      if (error instanceof Error) {
+        if (error.message.includes("Invalid client")) {
+          throw new Error(
+            "Invalid GitHub Client ID. Please check your OAuth configuration."
+          );
+        }
+        if (error.message.includes("redirect_uri_mismatch")) {
+          throw new Error(
+            "Redirect URI mismatch. Please check your GitHub OAuth app configuration."
+          );
+        }
+      }
+
       throw error;
     }
   }
