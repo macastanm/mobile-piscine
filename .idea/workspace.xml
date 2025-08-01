@@ -2,10 +2,60 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72e64fe5-7788-4352-b6ee-4ec72c7a22c2" name="Changes" comment="calculator app resize">
-      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/mobileModule04/diary_app/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/config/env.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mobileModule04/diary_app/config/env.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/mobileModule04/diary_app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/services/authService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mobileModule04/diary_app/services/authService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/.idea/mobileModule04.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/AUTHENTICATION_SETUP.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/IMPLEMENTATION_SUMMARY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/app/(auth)/_layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/app/(auth)/auth-options.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/app/(auth)/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/app/(protected)/(tabs)/_layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/app/(protected)/(tabs)/explore.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/app/(protected)/(tabs)/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/app/(protected)/_layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/app/+not-found.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/app/_layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/assets/fonts/SpaceMono-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/assets/images/adaptive-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/assets/images/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/assets/images/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/assets/images/partial-react-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/assets/images/react-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/assets/images/react-logo@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/assets/images/react-logo@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/assets/images/splash-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/components/Collapsible.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/components/ExternalLink.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/components/HapticTab.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/components/HelloWave.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/components/ParallaxScrollView.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/components/ThemedText.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/components/ThemedView.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/components/UserProfile.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/components/ui/IconSymbol.ios.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/components/ui/IconSymbol.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/components/ui/TabBarBackground.ios.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/components/ui/TabBarBackground.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/config/env.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/config/firebase.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/constants/Colors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/eslint.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/hooks/useAuth.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/hooks/useColorScheme.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/hooks/useColorScheme.web.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/hooks/useThemeColor.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/scripts/check-config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/scripts/reset-project.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/services/authService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobileModule04/diary_app/tsconfig.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,25 +68,25 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="30Bl9ebx6PRttjqKaHVpYjVIvtB" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/marialuiza/Documents/mobile-piscine",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/marialuiza/Documents/mobile-piscine&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -46,6 +96,7 @@
       <option name="presentableId" value="Default" />
       <updated>1753108696484</updated>
       <workItem from="1753108697524" duration="54000" />
+      <workItem from="1753792177297" duration="28000" />
     </task>
     <task id="LOCAL-00001" summary="calculator app resize">
       <option name="closed" value="true" />
