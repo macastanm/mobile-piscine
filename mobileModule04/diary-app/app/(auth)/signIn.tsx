@@ -1,6 +1,6 @@
 import { View, Text } from "../../components/Themed";
 import { FontAwesome as Icon } from "@expo/vector-icons";
-import { Button, useColorScheme } from "react-native";
+import { Button, useColorScheme, Alert } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import { useAuthRequest, makeRedirectUri } from "expo-auth-session";
 import * as React from "react";
@@ -37,15 +37,10 @@ export default function SignIn() {
     discovery
   );
 
-  const [userInfo, setUserInfo] = React.useState();
-
   const [requestGoogle, responseGoogle, promptAsyncGoogle] =
     Google.useAuthRequest({
       iosClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID_IOS!,
       androidClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID_ANDROID!,
-      // scopes: [ "identity", "user:email" ],
-      // redirectUri: makeRedirectUri(),
-      // usePKCE: false,
     });
 
   React.useEffect(() => {
@@ -60,24 +55,28 @@ export default function SignIn() {
     if (responseGoogle?.type === "success") {
       const { id_token } = responseGoogle.params;
       const credential = GoogleAuthProvider.credential(id_token);
-      console.log(credential);
-      const dataUser = await signInWithCredential(auth, credential);
-      console.log(dataUser);
+      try {
+        const dataUser = await signInWithCredential(auth, credential);
+      } catch (error) {
+        Alert.alert("Error", "Error signing in with Google, please check if your email is nor already sing in with GitHub.");
+      }
     }
   }
 
   async function handleResponse() {
     if (response?.type === "success") {
       const { code } = response.params;
-
       const { token_type, scope, access_token } = await createTokenWithCode(
         code
       );
-
       if (!access_token) return;
-
       const credential = GithubAuthProvider.credential(access_token);
-      const dataUser = await signInWithCredential(auth, credential);
+
+      try {
+        const dataUser = await signInWithCredential(auth, credential);
+      } catch (error) {
+        Alert.alert("Error", "Error signing in with Github, please check if your email is nor already sing in with Google.");
+      }
     }
   }
 

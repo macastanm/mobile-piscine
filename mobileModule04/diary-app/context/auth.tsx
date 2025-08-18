@@ -74,7 +74,6 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
 
   React.useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
-
       if (user) {
         const dataWeCareAbout = {
           uid: user.providerData[0].uid,
@@ -85,12 +84,11 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
           providerId: user.providerData[0].providerId,
           email: user.providerData[0].email!,
         };
-        console.log("pqp passa aqui ou nao");
         setUser(dataWeCareAbout);
         router.replace("/(tabs)");
       } else {
         console.log("User is not authenticated");
-        router.replace("/(auth)/signIn");
+        router.replace("/(auth)");
       }
     });
     return () => unsubscribeAuth();
@@ -104,7 +102,6 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
         signOut: () => {
           setUser(initialState);
           signOut(auth);
-          //   setHasNavigated(true);
         },
       }}
     >
