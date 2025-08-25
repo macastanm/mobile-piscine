@@ -58,8 +58,8 @@ function useProtectedRoute(user: User) {
     const inAuthGroup = segments[0] === "(auth)";
 
     if (!user.uid && !inAuthGroup) {
-      router.replace("/(auth)/signIn");
-      setHasNavigated(true);
+      // router.replace("/(auth)/signIn");
+      // setHasNavigated(true);
     } else if (user.uid && inAuthGroup) {
       router.replace("/(tabs)");
       setHasNavigated(true);
@@ -101,7 +101,7 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
         signIn: setUser,
         signOut: () => {
           setUser(initialState);
-          signOut(auth);
+          signOut(auth);  
         },
       }}
     >
