@@ -33,7 +33,7 @@ export default function TabOneScreen() {
   const loadEntries = async () => {
     try {
       setLoading(true);
-      const lastEntries = await diaryService.getLastEntries(user!.email, 3);
+      const lastEntries = await diaryService.getLastEntries(user!.email, 1000);
       setEntries(lastEntries);
     } catch (error) {
       // Don't show error alert for permission issues or empty collections
@@ -51,7 +51,7 @@ export default function TabOneScreen() {
       await diaryService.createEntry(entryData);
       setShowForm(false);
       await loadEntries(); // Reload entries after creating new one
-      Alert.alert("Success", "Diary entry created successfully!");
+      // Alert.alert("Success", "Diary entry created successfully!");
     } catch (error: any) {
       if (error.code === "permission-denied") {
         Alert.alert(
@@ -71,7 +71,7 @@ export default function TabOneScreen() {
     try {
       await diaryService.deleteEntry(entryId);
       await loadEntries(); // Reload entries after deleting
-      Alert.alert("Success", "Diary entry deleted successfully!");
+      // Alert.alert("Success", "Diary entry deleted successfully!");
     } catch (error: any) {
       if (error.code === "permission-denied") {
         Alert.alert(
@@ -113,8 +113,6 @@ export default function TabOneScreen() {
           <Ionicons name="log-out-outline" size={24} color="#FF3B30" />
         </TouchableOpacity>
       </View>
-
-      {/* Diary Entries Section */}
       <View style={styles.content}>
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>My Diary Entries</Text>
